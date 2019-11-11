@@ -45,6 +45,7 @@ public class ExcelUtils {
                                         Map<String, ExcelFormat> formatInfo) {
         try {
             fileName = new String((fileName + System.currentTimeMillis() + ".xlsx").getBytes(), StandardCharsets.UTF_8);
+            log.debug("开始导出{}文件", fileName);
             response.setContentType("application/octet-stream;charset=utf-8");
             response.setHeader("Content-Disposition", "attachment;filename=" + new String(fileName.getBytes(), StandardCharsets.UTF_8));
             response.addHeader("Param", "no-cache");
@@ -55,7 +56,7 @@ public class ExcelUtils {
             os.flush();
             os.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("excel导出失败", e);
         }
     }
 
